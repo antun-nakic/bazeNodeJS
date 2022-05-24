@@ -1,5 +1,5 @@
 import express from "express";
-import { createNewUser } from "../controllers/UserController.js";
+import { createUser, modifyUser } from "../controllers/UserController.js";
 const router = express.Router();
 
 /* GET home page. */
@@ -9,6 +9,7 @@ router.get("/", function (req, res) {
 });
 
 //treba primiti {name,pass}
-router.post("/create", createNewUser);
+router.post("/create", createUser);
+router.post("/modify", modifyUser);
 
 export default router;
