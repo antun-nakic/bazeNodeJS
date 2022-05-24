@@ -13,6 +13,9 @@ const port = 3000;
 //stvaranje aplikacije
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //postavljanje rutera na rute
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
