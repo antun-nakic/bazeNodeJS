@@ -13,4 +13,16 @@ dbConnection.connect(function (err) {
   console.log("Connected!");
 });
 
-export default dbConnection;
+export const execute = (query, params) => {
+  try {
+    return new Promise((resolve, reject) => {
+      dbConnection.query(query, params, (error, results) => {
+        if (error) reject(error);
+        else resolve(results);
+      });
+    });
+  } catch (error) {
+    console.error("[mysql.connector][execute][Error]: ", error);
+    throw new Error("failed to execute MySQL query");
+  }
+};

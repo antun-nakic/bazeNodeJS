@@ -1,19 +1,19 @@
-import dbConnection from "../db_conn.js";
+import { createUser } from "../services/UserService.js";
 
-export const createNewUser = (req, res) => {
-  if (req.body) {
-    dbConnection.query(
-      "INSERT INTO `users` (`name`, `pass`) VALUES (?,?)",
-      [req.body.name, req.body.pass],
-      function (error, results, fields) {
-        if (error) throw error;
-        console.log("The solution is: ", results);
-      }
+export const createNewUser = async (req, res) => {
+  try {
+    let results = await createUser([req.body.name, req.body.pass]);
+
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[UserController][createNewUser][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
     );
-    res.write(req.body.name);
-    res.end();
-  } else {
-    res.write("Sve pet, samo je reno 6.");
-    res.end();
+    res.status(500).json({
+      message: "Neuspijelo dodavanje novog korisnika u tablicu users",
+    });
   }
 };
