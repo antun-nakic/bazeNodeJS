@@ -1,10 +1,85 @@
-import dbConnection from "./db_conn.js";
+import * as TodoService from "../services/TodoService.js";
 
-const sqlDohvatiSveUsere = "SELECT * FROM users";
+export const createTodo = async (req, res) => {
+  try {
+    let results = await TodoService.createTodo([req.body.name, req.body.description]);
 
-dbConnection.query(sqlDohvatiSveUsere, function (err, result) {
-  if (err) throw err;
-  console.log("Result: " + JSON.stringify(result));
-});
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[TodoController][createTodo][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspijelo dodavanje novog reda u tablicu todo",
+    });
+  }
+};
 
-dbConnection.end();
+export const modifyTodo = async (req, res) => {
+  try {
+    let results = await TodoService.modifyTodo([
+      req.body.name,
+      req.body.description,
+      req.body.id
+    ]);
+
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[TodoController][modifyTodo][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspijela modifikacija korisnikove liste",
+    });
+  }
+};
+
+export const findTodo = async (req, res) => {
+  try {
+    let results = await TodoService.findTodo([
+      req.body.name,
+      req.body.description,
+      req.body.id
+    ]);
+    console.log(results)
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[TodoController][findTodo][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspijela potraga korisnikove liste",
+    });
+  }
+};
+
+export const getAllTodos = async (req, res) => {
+  try {
+    let results = await TodoService.getAllTodos([
+      req.params.name,
+    ]);
+    console.log(results)
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[TodoController][getAllTodos][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspijela potraga korisnikove liste",
+    });
+  }
+};
+
+
