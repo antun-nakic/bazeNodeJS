@@ -1,11 +1,11 @@
 import mysql from "mysql";
-
+//mysql://bf792365c0e3cb:7cc6b0e4@eu-cdbr-west-02.cleardb.net/heroku_4b59f38d83a2edc?reconnect=true
 var dbConnection = mysql.createConnection({
-  host: "127.0.0.1",
+  host: "eu-cdbr-west-02.cleardb.net",
   port: 3306,
-  user: "root",
-  password: "",
-  database: "todo",
+  user: "bf792365c0e3cb",
+  password: "7cc6b0e4",
+  database: "heroku_4b59f38d83a2edc",
 });
 
 dbConnection.connect(function (err) {
