@@ -29,6 +29,7 @@ export const modifyItem = async (req, res) => {
       req.body.name,
       req.body.description,
       req.body.state,
+      req.body.id,
     ]);
 
     res.status(200).json({
