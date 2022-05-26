@@ -13,7 +13,7 @@ dbConnection.connect(function (err) {
   console.log("Connected!");
 });
 
-export const execute = (query, params) => {
+export const execute = (query, params = null) => {
   try {
     return new Promise((resolve, reject) => {
       dbConnection.query(query, params, (error, results) => {
