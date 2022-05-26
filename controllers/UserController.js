@@ -40,3 +40,53 @@ export const modifyUser = async (req, res) => {
     });
   }
 };
+export const getUsers = async (req, res) => {
+  try {
+    let results = await UserService.getUsers();
+
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[UserController][getUsers][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspijela dohvačanje svih korisnika",
+    });
+  }
+};
+export const findUserByName = async (req, res) => {
+  try {
+    let results = await UserService.findUserByName(req.params.name);
+
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[UserController][findUserByName][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Neuspjelo pretraživanje korisnika",
+    });
+  }
+};
+export const dummyLogin = async (req, res) => {
+  try {
+    let results = await UserService.dummyLogin([req.body.name, req.body.pass]);
+    res.status(200).json({
+      results,
+    });
+  } catch (error) {
+    console.error(
+      "[UserController][dummyLogin][Error] ",
+      typeof error === "object" ? JSON.stringify(error) : error
+    );
+    res.status(500).json({
+      message: "Krivo koriničko ime ili šifra",
+    });
+  }
+};
