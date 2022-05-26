@@ -1,16 +1,15 @@
 import express from "express";
-import 
-{ 
-    createManaged, 
-    getManagedByTodo,
-    getManagedByUser,
-    deleteManaged
-} from "../controllers/ManagedController";
+import {
+  createManaged,
+  getManagedByTodo,
+  getManagedByUser,
+  deleteManaged,
+} from "../controllers/ManagedController.js";
 const router = express.Router();
 
 router.get("/", function (req, res) {
-    res.write("HENLO");
-    res.end();
+  res.write("HENLO");
+  res.end();
 });
 
 router.post("/createManaged", createManaged);
