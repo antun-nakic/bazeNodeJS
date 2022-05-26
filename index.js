@@ -8,10 +8,7 @@ import tasksRouter from "./routes/tasks.js";
 import managedRouter from "./routes/managed.js";
 import itemsRouter from "./routes/items.js";
 
-
-//Priprema environmenta
-const host = "localhost";
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 //stvaranje aplikacije
 const app = express();
@@ -28,6 +25,6 @@ app.use("/api/managed", managedRouter);
 app.use("/api/items", itemsRouter);
 
 //počni slušati i ujedino i serviraj prijaltelju
-app.listen(port, () => {
-  console.log(`Pokrenuto na http://${host}:${port}/`);
+app.listen(PORT, () => {
+  console.log(`Pokrenuto na ${PORT}/`);
 });
