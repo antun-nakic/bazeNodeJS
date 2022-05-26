@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", function (req, res) {
-  res.write("hello world");
+  res.write("Branimira i Daria u akciji!");
   res.end();
 });
 
